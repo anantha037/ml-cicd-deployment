@@ -1,0 +1,4 @@
+sklearn-learn
+joblib
+fastapi
+uvicorn
