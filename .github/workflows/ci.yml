@@ -8,6 +8,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      MODEL_VERSION: v${{ github.run_number }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -23,9 +26,11 @@ jobs:
       
       - name: Train Iris Model
         run: |
-          python train.py
+          python train.py $MODEL_VERSION
       
       - name: Deployment validation
+        env:
+          MODEL_VERSION: ${{ env.MODEL_VERSION }}
         run: |
           uvicorn app:app --host 127.0.0.1 --port 8000 &
           sleep 10

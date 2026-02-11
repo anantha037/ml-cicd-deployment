@@ -2,6 +2,9 @@ from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import joblib
+import sys
+
+version = sys.argv[1] if len(sys.argv) > 1 else "v1"
 
 data = load_iris()
 
@@ -16,4 +19,6 @@ model = LogisticRegression()
 
 model.fit(X_train, y_train)
 
-joblib.dump(model,"model.joblib")
+joblib.dump(model,f"model_{version}.joblib")
+
+print(f"Model saved: model_{version}.joblib")

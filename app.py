@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 import joblib
+import os
 
 app = FastAPI()
 
-model = joblib.load("model.joblib")
+version = os.getenv("MODEL_VERSION","v1")
+model = joblib.load(f"model_{version}.joblib")
 
 @app.get("/")
 def home():
